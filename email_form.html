@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form</title>
+</head>
+<body>
+    <form id="simpleForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br>
+
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" name="phone" required><br>
+
+        <label for="accommodations">Accommodations:</label>
+        <textarea id="accommodations" name="accommodations"></textarea><br>
+
+        <label for="date">Date:</label>
+        <select id="date" name="date" required>
+            <option value="march22">March 22, 2025</option>
+            <option value="march23">March 23, 2025</option>
+        </select><br>
+
+        <label for="time">Time Slot:</label>
+        <select id="time" name="time" required>
+            <option value="9:00-10:30">9:00 AM - 10:30 AM</option>
+            <option value="10:30-12:00">10:30 AM - 12:00 PM</option>
+            <option value="12:00-1:30">12:00 PM - 1:30 PM</option>
+            <option value="1:30-3:00">1:30 PM - 3:00 PM</option>
+        </select><br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        (function(){
+            emailjs.init('wjagkYfx-cQSy0XCZ'); // Replace 'YOUR_USER_ID' with your actual EmailJS user ID
+        })();
+
+        document.getElementById('simpleForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                accommodations: document.getElementById('accommodations').value,
+                date: document.getElementById('date').value,
+                time: document.getElementById('time').value
+            };
+
+            const templateParams = {
+                to_name: 'Shauna Frankovich',
+                from_name: formData.name,
+                user_email: formData.email,
+                message: `Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nAccommodations: ${formData.accommodations}\nDate: ${formData.date}\nTime Slot: ${formData.time}`
+            };
+
+            emailjs.send('service_4my57ft', 'template_ltjl3sg', templateParams)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    alert('Form submitted successfully!');
+                }, function(error) {
+                    console.log('FAILED...', error);
+                    alert('Failed to submit the form. Please try again.');
+                });
+        });
+    </script>
