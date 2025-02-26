@@ -39,7 +39,7 @@
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script>
         (function(){
-            emailjs.init(-YeEwp_eKrzC9o5Qb); // Replace 'YOUR_PUBLIC_KEY' with your actual EmailJS public key
+            emailjs.init('-YeEwp_eKrzC9o5Qb'); // Replace 'YOUR_PUBLIC_KEY' with your actual EmailJS public key
         })();
 
         document.getElementById('simpleForm').addEventListener('submit', function(event) {
@@ -61,9 +61,9 @@
                 message: `Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nAccommodations: ${formData.accommodations}\nDate: ${formData.date}\nTime Slot: ${formData.time}`
             };
 
-            emailjs.send(template_ltjl3sg, template_ltjl3sg, templateParams, {
-                publicKey: -YeEwp_eKrzC9o5Qb,
-                privateKey: cOOe819DOYLmT2Xczge25
+            emailjs.send('service_4my57ft', 'template_ltjl3sg', templateParams, {
+                publicKey: '-YeEwp_eKrzC9o5Qb',
+                privateKey: 'cOOe819DOYLmT2Xczge25'
             })
             .then(function(response) {
                 console.log('SUCCESS!', response.status, response.text);
